@@ -1,7 +1,7 @@
 import Layout from '../components/layout';
 import PageMeta from '../components/page-meta';
 import PostSummary from '../components/post-summary';
-import { getSortedPostsData, PostMetadata } from '../lib/posts';
+import { getPostsData, PostMetadata } from '../lib/posts';
 
 export default function Home({
   posts,
@@ -32,7 +32,7 @@ export default function Home({
 export async function getStaticProps() {
   return {
     props: {
-      posts: getSortedPostsData(),
+      posts: getPostsData(),
     },
   };
 }

@@ -13,9 +13,19 @@ export type PostMetadata = {
   tags?: string[],
 }
 
-export function getSortedPostsData(): PostMetadata[] {
+export function getPostData(id: string): PostMetadata {
+  const filePath = path.join(POSTS_DIR, `${id}.md`);
+  const fileContents = fs.readFileSync(filePath, 'utf-8');
+
+  return {
+    id,
+    ...grayMatter(fileContents).data as PostMetadata,
+  };
+}
+
+export function getPostsData(sorted = true): PostMetadata[] {
   const postFilenames = fs.readdirSync(POSTS_DIR);
-  const postData: PostMetadata[] = postFilenames.map((filename) => {
+  const postsData: PostMetadata[] = postFilenames.map((filename) => {
     const id = filename.replace(/\.md$/, '');
     const fileContents = fs.readFileSync(path.join(POSTS_DIR, filename), 'utf-8');
 
@@ -25,7 +35,7 @@ export function getSortedPostsData(): PostMetadata[] {
     };
   });
 
-  return postData.sort(({ date: a }, { date: b }) => {
+  return sorted ? postsData.sort(({ date: a }, { date: b }) => {
     if (a > b) {
       return 1;
     } else if (a < b) {
@@ -33,5 +43,13 @@ export function getSortedPostsData(): PostMetadata[] {
     }
 
     return 0;
-  });
+  }) : postsData;
+}
+
+export function getPostIds() {
+  return fs.readdirSync(POSTS_DIR).map((filename) => ({
+    params: {
+      id: filename.replace(/\.md/, ''),
+    },
+  }));
 }

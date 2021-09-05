@@ -3,7 +3,7 @@ import styles from './layout.module.css';
 
 export type LayoutProps = {
   children: React.ReactNode,
-  contentTag?: 'div' | 'main' | 'section',
+  contentTag?: 'div' | 'article' | 'section',
   home?: boolean,
 };
 
@@ -30,7 +30,7 @@ const NavMenu = ({ className }: { className: string }): React.ReactElement => (
 export default function Layout({
   children,
   home,
-  contentTag: ContentTag = 'main',
+  contentTag: ContentTag = 'div',
 }: LayoutProps) {
   const BrandingTag = home ? 'h1' : 'p';
 
