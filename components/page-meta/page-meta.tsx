@@ -5,7 +5,7 @@ export type PageMetaProps = {
   description: string,
   image?: string,
   url?: string,
-  type: 'website' | 'article',
+  type?: 'website' | 'article',
 };
 
 export default function PageMeta({

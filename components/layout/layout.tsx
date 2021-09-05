@@ -3,7 +3,7 @@ import styles from './layout.module.css';
 
 export type LayoutProps = {
   children: React.ReactNode,
-  contentTag: 'div' | 'main' | 'section',
+  contentTag?: 'div' | 'main' | 'section',
   home?: boolean,
 };
 
