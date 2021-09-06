@@ -1,5 +1,7 @@
 import path from 'path';
 import fs from 'fs';
+import { remark } from 'remark';
+import remarkHtml from 'remark-html';
 import grayMatter from 'gray-matter';
 
 export const POSTS_DIR = path.join(process.cwd(), 'posts');
@@ -7,19 +9,32 @@ export const POSTS_DIR = path.join(process.cwd(), 'posts');
 export type PostMetadata = {
   id: string,
   title: string,
-  summary: string,
+  description: string,
   date: string,
   image?: string,
   tags?: string[],
 }
 
-export function getPostData(id: string): PostMetadata {
+export type PostData = PostMetadata & {
+  content: string,
+}
+
+export async function getPostData(id: string): Promise<PostData> {
   const filePath = path.join(POSTS_DIR, `${id}.md`);
   const fileContents = fs.readFileSync(filePath, 'utf-8');
+  const {
+    data: metadata,
+    content: markdown,
+  } = grayMatter(fileContents);
+
+  const remarked = await remark()
+    .use(remarkHtml)
+    .process(markdown);
 
   return {
     id,
-    ...grayMatter(fileContents).data as PostMetadata,
+    content: remarked.toString(),
+    ...metadata as PostMetadata,
   };
 }
 

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import VisuallyHidden from '@reach/visually-hidden';
+import Date from '../../components/date';
 import { PostMetadata } from '../../lib/posts';
 
 export default function PostSummary({ postMetadata }): React.ReactElement<PostMetadata> {
@@ -12,20 +13,20 @@ export default function PostSummary({ postMetadata }): React.ReactElement<PostMe
             <a tabIndex={-1}>{postMetadata.title}</a>
           </Link>
         </h3>
-        <time>{postMetadata.date}</time>
+        <Date dateString={postMetadata.date} />
         {postMetadata.image && (
           <Link href={`/blog/${postMetadata.id}`}>
             <a tabIndex={-1}>
               <Image
                 src={postMetadata.image}
-                alt={postMetadata.summary}
+                alt={postMetadata.description}
                 aria-hidden="true"
               />
             </a>
           </Link>
         )}
       </header>
-      <p>{postMetadata.summary}</p>
+      <p>{postMetadata.description}</p>
       <footer>
         <Link href={`/blog/${postMetadata.id}`}>
           <a>
