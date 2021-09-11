@@ -1,4 +1,7 @@
 import Link from 'next/link';
+import Head from 'next/head';
+import VisuallyHidden from '@reach/visually-hidden';
+import Logo from './principled-engineer-logo.svg';
 import styles from './layout.module.css';
 
 export type LayoutProps = {
@@ -36,18 +39,18 @@ export default function Layout({
 
   return (
     <div className={styles.container}>
+      <Head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#291029" />
+      </Head>
+
       <header className={styles.header}>
         <BrandingTag className={styles.branding} id="branding">
-          {/* <Image
-            priority
-            src="/images/principled-engineer-logo.jpg"
-            className={styles.logo}
-            height={144}
-            width={144}
+          <Logo
             alt=""
             aria-hidden="true"
-          /> */}
-          The Principled Engineer
+          />
+          <VisuallyHidden>The Principled Engineer</VisuallyHidden>
         </BrandingTag>
         <nav className={styles.nav}>
           <NavMenu className={styles.headerNav} />
