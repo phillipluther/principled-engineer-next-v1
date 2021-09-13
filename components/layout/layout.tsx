@@ -13,8 +13,8 @@ export type LayoutProps = {
 const NavMenu = ({ className }: { className: string }): React.ReactElement => (
   <ul className={className}>
     <li className={styles.navItem}>
-      <Link href="/">
-        <a className={styles.link}>Home</a>
+      <Link href="/blog">
+        <a className={styles.link}>Blog</a>
       </Link>
     </li>
     <li className={styles.navItem}>
@@ -41,16 +41,21 @@ export default function Layout({
     <div className={styles.container}>
       <Head>
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#291029" />
+        <meta name="theme-color" content="#384146" />
       </Head>
 
       <header className={styles.header}>
         <BrandingTag className={styles.branding} id="branding">
-          <Logo
-            alt=""
-            aria-hidden="true"
-          />
-          <VisuallyHidden>The Principled Engineer</VisuallyHidden>
+          <Link href="/">
+            <a>
+              <Logo
+                alt=""
+                aria-hidden
+                className={styles.logo}
+              />
+              <VisuallyHidden>The Principled Engineer</VisuallyHidden>
+            </a>
+          </Link>
         </BrandingTag>
         <nav className={styles.nav}>
           <NavMenu className={styles.headerNav} />

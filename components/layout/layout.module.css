@@ -2,3 +2,12 @@
   max-width: 800px;
   margin: 0 auto;
 }
+
+.branding {
+  margin: 0;
+}
+
+.logo {
+  width: auto;
+  height: 48px;
+}
