@@ -10,8 +10,12 @@ export type LayoutProps = {
   home?: boolean,
 };
 
-const NavMenu = ({ className }: { className: string }): React.ReactElement => (
+const NavMenu = ({ className, children = null }: {
+  className: string,
+  children?: React.ReactElement,
+}): React.ReactElement => (
   <ul className={className}>
+    {children}
     <li className={styles.navItem}>
       <Link href="/blog">
         <a className={styles.link}>Blog</a>
@@ -71,7 +75,13 @@ export default function Layout({
         <section>
           <h3 className={styles.footerHeading}>Supplemental Navigation</h3>
           <nav className={styles.nav}>
-            <NavMenu className={styles.footerNav} />
+            <NavMenu className={styles.footerNav}>
+              <li className={styles.navItem}>
+                <Link href="/">
+                  <a className={styles.link}>Home</a>
+                </Link>
+              </li>
+            </NavMenu>
           </nav>
         </section>
         <section className={styles.disclaimers}>
